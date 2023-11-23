@@ -101,8 +101,10 @@ func (productRepo productRepository) GetRecords(ctx context.Context, productFilt
 			    ) as total_count
 			FROM products p
 			JOIN suppliers s ON p.supplier_id = s.id
+			JOIN product_stocks ps ON p.id = ps.product_id
 			WHERE
 				p.status_id = true
+			  	AND ps.stock_quantity > 0
 				AND (LOWER(p.name) LIKE LOWER($1) OR $1 IS NULL)
 				AND (p.unit_price BETWEEN $2 AND $3 OR $2 IS NULL OR $3 IS NULL)
 				AND (p.brand_id = ANY($4) OR $4 IS NULL)
@@ -115,7 +117,7 @@ func (productRepo productRepository) GetRecords(ctx context.Context, productFilt
 	var totalCount int64
 	offset := (currentPageInt - 1) * itemPerPageInt
 	brandIDs := pq.Array(productFilterParams.BrandIDs)
-	err = productRepo.dbClient.Select(&productRecords, query, "%"+productFilterParams.Name+"%", &productFilterParams.MinPrice, &productFilterParams.MaxPrice, &brandIDs, &productFilterParams.CategoryID, &productFilterParams.SupplierID, &productFilterParams.IsVerifiedSupplier, &itemPerPageInt, &offset)
+	err = productRepo.dbClient.SelectContext(ctx, &productRecords, query, "%"+productFilterParams.Name+"%", &productFilterParams.MinPrice, &productFilterParams.MaxPrice, &brandIDs, &productFilterParams.CategoryID, &productFilterParams.SupplierID, &productFilterParams.IsVerifiedSupplier, &itemPerPageInt, &offset)
 	if err != nil {
 		return nil, nil, err
 		return

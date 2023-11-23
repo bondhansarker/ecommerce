@@ -14,8 +14,14 @@ To get up and running with the project, follow these simple steps:
 
 ```
 $ git clone https://github.com/bondhansarker/ecommerce.git
+```
+```
 $ cd ecommerce
-$ cp internal/config/.env.example internal/config/.env # create a copy of the example environment file, and also follow configuration steps on the difference section below
+```
+```
+$ cp internal/config/.env.example internal/config/.env
+```
+```
 $ docker compose up
 ```
 
@@ -140,14 +146,8 @@ This folder contains all the business logic and other implementation details of 
     -   `handlers` folder: This folder contains the implementation of HTTP handlers, which handle incoming HTTP requests and send responses back to the client.
     -   `routes` folder: This folder contains the implementation of routes, which map URLs to handlers.
 
-
--   `utils` folder
-
-    -   this folder contains utility functions and classes used throughout the application.
-
-##### `pkg` folder
-
-This folder contains reusable packages that are shared across different parts of the application.
+-   `utils` folder: This folder contains utility functions and classes used throughout the application.
+-    `pkg` folder: This folder contains reusable packages that are shared across different parts of the application.
 
 ##### `Dockerfile`: This file is used to build a Docker image of the application.
 ##### `docker-compose.yml`: This file is used to start the application and its dependencies (such as the database) using Docker Compose.
