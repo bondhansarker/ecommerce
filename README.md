@@ -87,6 +87,10 @@ root/
 |   |-- helpers/
 |   |   |-- helper.common.go
 |   |-- logger/
+|-- pkg/
+|   |-- postman_collection/
+|   |   |-- Ecommerce.postman_collection.json
+|   |   |-- Ecommerce DEV.postman_environment.json
 |-- vendor/
 |-- go.mod
 |-- go.sum
