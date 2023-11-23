@@ -1,0 +1,638 @@
+{
+	"info": {
+		"_postman_id": "0dfddc25-73f6-4733-a443-9d50ca939a55",
+		"name": "Ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28931174"
+	},
+	"item": [
+		{
+			"name": "brands",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Brand One\",\n    \"status_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/brands",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Brand Bondhan\",\n    \"status_id\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/brands/13",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"brands",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/brands/13",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"brands",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/brands",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"brands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/brands/10",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"brands",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "supplier",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Supplier Name\",\n    \"email\": \"supplier@example.com\",\n    \"phone\": \"1234567890\",\n    \"status_id\": 1,\n    \"is_verified_supplier\": false\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/suppliers",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Supplier Update\",\n    \"email\": \"supplier@example.com\",\n    \"phone\": \"44444\",\n    \"status_id\": 1,\n    \"is_verified_supplier\": false\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/suppliers/3",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"suppliers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/suppliers/3",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"suppliers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/suppliers",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/suppliers/2",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"suppliers",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Category Two SubChild\",\n    \"parent_id\": 8,\n    \"sequence\": 1,\n    \"status_id\": 0\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/categories",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Category Two SubChildren\",\n    \"parent_id\": 8,\n    \"sequence\": 1,\n    \"status_id\": 0,\n    \"created_at\": \"2023-11-22T23:52:01.659153Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/categories/10",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"categories",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/categories/10",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"categories",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tree list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/categories",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/categories/list",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"categories",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/categories/1",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Example Bondhan\",\n  \"description\": \"This is an example product description.\",\n  \"specifications\": \"Example specifications for the product.\",\n  \"brand_id\": 1,\n  \"category_id\": 3,\n  \"supplier_id\": 2,\n  \"unit_price\": 200,\n  \"discount_price\": 19.99,\n  \"tags\": \"example, product, tags\",\n  \"status_id\": 1,\n  \"stock_quantity\": 100\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/products",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Update Product\",\n  \"description\": \"This is an example product description.\",\n  \"specifications\": \"Example specifications for the product.\",\n  \"brand_id\": 1,\n  \"category_id\": 2,\n  \"supplier_id\": 2,\n  \"unit_price\": 29.99,\n  \"discount_price\": 19.99,\n  \"tags\": \"example, product, tags\",\n  \"status_id\": 1\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/products/5",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"products",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/products/8",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"products",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/products?current_page=1&item_per_page=10",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "bondhan",
+									"disabled": true
+								},
+								{
+									"key": "min_price",
+									"value": "10.000000",
+									"disabled": true
+								},
+								{
+									"key": "max_price",
+									"value": "100.000000",
+									"disabled": true
+								},
+								{
+									"key": "brand_ids",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "brand_ids",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "brand_ids",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "category_id",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "supplier_id",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "is_verified_supplier",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "current_page",
+									"value": "1"
+								},
+								{
+									"key": "item_per_page",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/products/3",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"products",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Stock",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"product_id\": 3,\n  \"stock_quantity\": 50\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/product_stocks",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"product_stocks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"product_id\": 3,\n  \"stock_quantity\": 400\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{v1_base_url}}/product_stocks/7",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"product_stocks",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/product_stocks/3",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"product_stocks",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/product_stocks",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"product_stocks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{v1_base_url}}/product_stocks/4",
+							"host": [
+								"{{v1_base_url}}"
+							],
+							"path": [
+								"product_stocks",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
