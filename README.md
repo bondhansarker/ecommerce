@@ -37,25 +37,6 @@ PostgreSQL
 -   `DB_POSTGRES_DSN`: The database connection URI in DSN format (defaults to "user=myuser password=mypassword host=myhost port=5432 dbname=mydb sslmode=disable timezone=Asia/Jakarta")
 -   `DB_POSTGRES_URL`: The database connection URI in URL format (defaults to "postgres://user:pass@host/db")
 
-##### JWT
-
--   `JWT_SECRET`: The secret key used to sign and verify JWT tokens (defaults to "dont-tuch-mytralalala-mydangdingdong")
--   `JWT_EXPIRED`: The number of hours until JWT tokens expire (defaults to 5)
--   `JWT_ISSUER`: The issuer of JWT tokens (defaults to "snykk_here")
-
-##### OTP
-
--   `OTP_EMAIL`: The email address to send OTP codes to (defaults to "patrick@gmail.com")
--   `OTP_PASSWORD`: The password to use for sending OTP codes (defaults to "idonthavepassword")
-
-##### Cache
-
-Redis
-
--   `REDIS_HOST`: The host and port of the Redis server (defaults to "localhost:6969")
--   `REDIS_PASS`: The password to use for connecting to Redis (defaults to "mydangdingdong")
--   `REDIS_EXPIRED`: The number of minutes until cache items expire in Redis (defaults to 5)
-
 ### Folder Structure
 
 ```
