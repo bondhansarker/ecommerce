@@ -1,14 +1,15 @@
 package v1
 
 import (
+	"net/http"
+	"strconv"
+	"strings"
+
 	"github.com/bondhansarker/ecommerce/internal/business/domains/v1"
 	"github.com/bondhansarker/ecommerce/internal/http/datatransfers/requests"
 	"github.com/bondhansarker/ecommerce/internal/http/datatransfers/responses"
 	"github.com/bondhansarker/ecommerce/pkg/logger"
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"strconv"
-	"strings"
 )
 
 type ProductHandler struct {
@@ -69,6 +70,34 @@ func (productHandler ProductHandler) Get(ctx *gin.Context) {
 }
 
 func (productHandler ProductHandler) GetList(ctx *gin.Context) {
+	currentPage := ctx.Query("current_page")
+	itemPerPage := ctx.Query("item_per_page")
+
+	var currentPageInt, itemPerPageInt int
+	var parseErr error
+
+	if strings.TrimSpace(currentPage) != "" {
+		currentPageInt, parseErr = strconv.Atoi(currentPage)
+		if parseErr != nil {
+			NewErrorResponse(ctx, http.StatusBadRequest, parseErr.Error())
+			return
+		}
+	}
+	if strings.TrimSpace(itemPerPage) != "" {
+		itemPerPageInt, parseErr = strconv.Atoi(itemPerPage)
+		if parseErr != nil {
+			NewErrorResponse(ctx, http.StatusBadRequest, parseErr.Error())
+			return
+		}
+	}
+
+	if currentPageInt <= 0 {
+		currentPageInt = 1
+	}
+
+	if itemPerPageInt <= 0 {
+		itemPerPageInt = 10
+	}
 	var productQueryParams requests.ProductQueryParams
 	// Bind query parameters to the struct
 	if err := ctx.ShouldBindQuery(&productQueryParams); err != nil {
@@ -76,7 +105,7 @@ func (productHandler ProductHandler) GetList(ctx *gin.Context) {
 		return
 	}
 
-	outputDomain, statusCode, err := productHandler.productUseCase.GetList(ctx, productQueryParams.ToV1ProductFilterParams())
+	outputDomain, paginationResult, statusCode, err := productHandler.productUseCase.GetList(ctx, productQueryParams.ToV1ProductFilterParams(), currentPageInt, itemPerPageInt)
 	logger.Debug(outputDomain, statusCode, err)
 	if err != nil {
 		NewErrorResponse(ctx, statusCode, err.Error())
@@ -86,7 +115,8 @@ func (productHandler ProductHandler) GetList(ctx *gin.Context) {
 	productListResponse := responses.ToResponseListOfProducts(outputDomain)
 
 	NewSuccessResponse(ctx, statusCode, "products fetched successfully", map[string]interface{}{
-		"products": productListResponse,
+		"products":   productListResponse,
+		"pagination": paginationResult,
 	})
 }
 

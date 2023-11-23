@@ -1,8 +1,9 @@
 package records
 
 import (
-	V1Domains "github.com/bondhansarker/ecommerce/internal/business/domains/v1"
 	"time"
+
+	V1Domains "github.com/bondhansarker/ecommerce/internal/business/domains/v1"
 )
 
 type Product struct {
@@ -18,6 +19,7 @@ type Product struct {
 	Tags           string    `db:"tags"`
 	StatusID       *bool     `db:"status_id"`
 	CreatedAt      time.Time `db:"created_at"`
+	TotalCount     int64     `db:"total_count" json:"-"`
 }
 
 // ToProductRecord converts a ProductDomain to a Product record

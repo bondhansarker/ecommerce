@@ -2,10 +2,11 @@ package v1
 
 import (
 	"context"
+	"net/http"
+
 	V1Domains "github.com/bondhansarker/ecommerce/internal/business/domains/v1"
 	"github.com/bondhansarker/ecommerce/internal/utils"
 	"github.com/bondhansarker/ecommerce/pkg/helpers"
-	"net/http"
 )
 
 type productUseCase struct {
@@ -71,12 +72,12 @@ func (p productUseCase) GetByID(ctx context.Context, id int64) (outputDomain V1D
 	return outputDomain, http.StatusOK, nil
 }
 
-func (p productUseCase) GetList(ctx context.Context, productFilterParams V1Domains.ProductFilterParams) (outputDomains []V1Domains.ProductDomain, statusCode int, err error) {
-	outputDomains, err = p.productRepo.GetRecords(ctx, productFilterParams)
+func (p productUseCase) GetList(ctx context.Context, productFilterParams V1Domains.ProductFilterParams, currentPageInt int, itemPerPageInt int) (outputDomains []V1Domains.ProductDomain, paginationResult *helpers.PaginationResult, statusCode int, err error) {
+	outputDomains, paginationResult, err = p.productRepo.GetRecords(ctx, productFilterParams, currentPageInt, itemPerPageInt)
 	if err != nil {
-		return []V1Domains.ProductDomain{}, http.StatusInternalServerError, err
+		return []V1Domains.ProductDomain{}, paginationResult, http.StatusInternalServerError, err
 	}
-	return outputDomains, http.StatusOK, nil
+	return outputDomains, paginationResult, http.StatusOK, nil
 }
 
 func (p productUseCase) Update(ctx context.Context, inputDomain V1Domains.ProductDomain) (statusCode int, err error) {

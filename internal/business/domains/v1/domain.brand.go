@@ -16,7 +16,6 @@ type BrandUseCase interface {
 	Create(ctx context.Context, inputDomain BrandDomain) (outputDomain BrandDomain, statusCode int, err error)
 	GetByID(ctx context.Context, id int64) (outputDomain BrandDomain, statusCode int, err error)
 	GetList(ctx context.Context) (outputDomain []BrandDomain, statusCode int, err error)
-	//GetList(ctx context.Context, currentPageInt int, itemPerPageInt int) (outputDomain []BrandDomain, statusCode int, err error)
 	Update(ctx context.Context, inputDomain BrandDomain) (statusCode int, err error)
 	Delete(ctx context.Context, id int64) (statusCode int, err error)
 }

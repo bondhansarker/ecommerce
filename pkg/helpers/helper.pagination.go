@@ -1,13 +1,8 @@
-package v1
+package helpers
 
-import (
-	"errors"
-)
+import "errors"
 
-var NoDataFound = errors.New("no data found")
-var RowsPerPageZeroError = errors.New("per_page value must be grater than zero")
-
-type Pagination struct {
+type PaginationResult struct {
 	Total       int64 `json:"total"`
 	PerPage     int   `json:"per_page"`
 	CurrentPage int   `json:"current_page"`
@@ -15,10 +10,10 @@ type Pagination struct {
 	HasNextPage bool  `json:"has_next_page"`
 }
 
-func GetPaginationInfoData(totalCount int64, CurrentPage, limitPerPage int) (*Pagination, error) {
+func GetPaginationInfoData(totalCount int64, CurrentPage, limitPerPage int) (*PaginationResult, error) {
 	// Calculate the total number of pages
 	if limitPerPage == 0 {
-		return nil, RowsPerPageZeroError
+		return nil, errors.New("limitPerPage value must be grater than zero")
 	}
 	totalPages := totalCount / int64(limitPerPage)
 	if totalCount%int64(limitPerPage) > 0 {
@@ -26,7 +21,7 @@ func GetPaginationInfoData(totalCount int64, CurrentPage, limitPerPage int) (*Pa
 	}
 
 	hasNextPage := int64(CurrentPage) < totalPages
-	pagination := &Pagination{
+	pagination := &PaginationResult{
 		Total:       totalCount,
 		PerPage:     limitPerPage,
 		CurrentPage: CurrentPage,

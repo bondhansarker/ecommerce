@@ -2,8 +2,10 @@ package v1
 
 import (
 	"context"
-	"github.com/jmoiron/sqlx"
 	"time"
+
+	"github.com/bondhansarker/ecommerce/pkg/helpers"
+	"github.com/jmoiron/sqlx"
 )
 
 type ProductDomain struct {
@@ -35,7 +37,7 @@ type ProductFilterParams struct {
 type ProductUseCase interface {
 	Create(ctx context.Context, inputDomain ProductDomain) (outputDomain ProductDomain, statusCode int, err error)
 	GetByID(ctx context.Context, id int64) (outputDomain ProductDomain, statusCode int, err error)
-	GetList(ctx context.Context, productFilterParams ProductFilterParams) (outputDomain []ProductDomain, statusCode int, err error)
+	GetList(ctx context.Context, productFilterParams ProductFilterParams, currentPageInt int, itemPerPageInt int) (outputDomain []ProductDomain, paginationResult *helpers.PaginationResult, statusCode int, err error)
 	Update(ctx context.Context, inputDomain ProductDomain) (statusCode int, err error)
 	Delete(ctx context.Context, id int64) (statusCode int, err error)
 }
@@ -43,7 +45,7 @@ type ProductUseCase interface {
 type ProductRepository interface {
 	CreateRecord(ctx context.Context, inputDomain ProductDomain) (outputDomain ProductDomain, err error)
 	CreateRecordWithTransaction(tx *sqlx.Tx, inputDomain ProductDomain) (outputDomain ProductDomain, err error)
-	GetRecords(ctx context.Context, productFilterParams ProductFilterParams) (outputDomains []ProductDomain, err error)
+	GetRecords(ctx context.Context, productFilterParams ProductFilterParams, currentPageInt int, itemPerPageInt int) (outputDomains []ProductDomain, paginationResult *helpers.PaginationResult, err error)
 	GetRecordByID(ctx context.Context, id int64) (outputDomain ProductDomain, err error)
 	UpdateRecord(ctx context.Context, inputDomain ProductDomain) (err error)
 	DeleteRecordByID(ctx context.Context, id int64) (err error)

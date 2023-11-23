@@ -1,14 +1,15 @@
 package v1
 
 import (
+	"net/http"
+	"strconv"
+	"strings"
+
 	V1Domains "github.com/bondhansarker/ecommerce/internal/business/domains/v1"
 	"github.com/bondhansarker/ecommerce/internal/http/datatransfers/requests"
 	"github.com/bondhansarker/ecommerce/internal/http/datatransfers/responses"
 	"github.com/bondhansarker/ecommerce/pkg/logger"
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"strconv"
-	"strings"
 )
 
 type BrandHandler struct {
@@ -70,35 +71,6 @@ func (brandHandler BrandHandler) Get(ctx *gin.Context) {
 }
 
 func (brandHandler BrandHandler) GetList(ctx *gin.Context) {
-	//currentPage := ctx.Query("current_page")
-	//itemPerPage := ctx.Query("item_per_page")
-	//
-	//var currentPageInt, itemPerPageInt int
-	//var parseErr error
-	//
-	//if strings.TrimSpace(currentPage) != "" {
-	//	currentPageInt, parseErr = strconv.Atoi(currentPage)
-	//	if parseErr != nil {
-	//		NewErrorResponse(ctx, http.StatusBadRequest, parseErr.Error())
-	//		return
-	//	}
-	//}
-	//if strings.TrimSpace(itemPerPage) != "" {
-	//	itemPerPageInt, parseErr = strconv.Atoi(itemPerPage)
-	//	if parseErr != nil {
-	//		NewErrorResponse(ctx, http.StatusBadRequest, parseErr.Error())
-	//		return
-	//	}
-	//}
-	//
-	//if currentPageInt <= 0 {
-	//	currentPageInt = 1
-	//}
-	//
-	//if itemPerPageInt <= 0 {
-	//	itemPerPageInt = 5
-	//}
-
 	outputDomain, statusCode, err := brandHandler.brandUseCase.GetList(ctx)
 	logger.Debug(outputDomain, statusCode, err)
 	if err != nil {

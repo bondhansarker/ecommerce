@@ -3,6 +3,7 @@ package v1
 import (
 	"context"
 	"fmt"
+
 	V1Domains "github.com/bondhansarker/ecommerce/internal/business/domains/v1"
 	"github.com/bondhansarker/ecommerce/internal/constants"
 	"github.com/bondhansarker/ecommerce/internal/datasources/records"
@@ -63,21 +64,6 @@ func (brandRepo brandRepository) GetRecords(ctx context.Context) (outputDomains 
 	}
 	return records.ToArrayOfBrandDomain(&brandRecords), nil
 }
-
-//func (brandRepo brandRepository) GetRecords(ctx context.Context, currentPage int,
-//	itemsPerPage int) (outputDomains []V1Domains.BrandDomain, err error) {
-//	var brandRecords []records.Brand
-//	offset := (currentPage - 1) * itemsPerPage
-//
-//	query := `SELECT id, name, status_id, created_at FROM brands LIMIT $1 OFFSET $2`
-//
-//	//var totalCount int64
-//	err = brandRepo.dbClient.SelectContext(ctx, &brandRecords, query, itemsPerPage, offset)
-//	if err != nil {
-//		return records.ToArrayOfDomain(&brandRecords), err
-//	}
-//	return records.ToArrayOfDomain(&brandRecords), nil
-//}
 
 func (brandRepo brandRepository) UpdateRecord(ctx context.Context, inputDomain V1Domains.BrandDomain) (err error) {
 	brandRecord := records.ToBrandRecord(inputDomain)
