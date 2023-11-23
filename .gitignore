@@ -1,0 +1,7 @@
+vendor
+vendor/modules.txt
+tmp
+go-rest-boilerplate.out
+internal/config/.env
+.idea
+postgres-data
