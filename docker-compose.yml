@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-  # Golang application
   app:
     build:
       context: .
@@ -13,9 +12,7 @@ services:
     env_file:
       - ./internal/config/.env
     volumes:
-      - .:/usr/src/app
-
-  # PostgreSQL database
+      - .:/src
   postgres:
     image: postgres:latest
     environment:
