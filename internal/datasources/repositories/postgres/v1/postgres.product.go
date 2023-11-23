@@ -91,29 +91,43 @@ func (productRepo productRepository) GetRecordByID(ctx context.Context, id int64
 
 func (productRepo productRepository) GetRecords(ctx context.Context, productFilterParams V1Domains.ProductFilterParams, currentPageInt int, itemPerPageInt int) (outputDomains []V1Domains.ProductDomain, paginationResult *helpers.PaginationResult, err error) {
 	var productRecords []records.Product
-	logger.Debug(productFilterParams.CategoryID)
+	logger.Debug(productFilterParams)
+
 	// Build the SQL query
-	query := `
-			SELECT p.id, p.name, p.description, p.brand_id, p.category_id, p.supplier_id,
-				p.unit_price, p.discount_price, p.tags, p.status_id, p.created_at,
-				(
-			       SELECT COUNT(*) FROM products p WHERE p.status_id = true
-			    ) as total_count
-			FROM products p
-			JOIN suppliers s ON p.supplier_id = s.id
-			JOIN product_stocks ps ON p.id = ps.product_id
-			WHERE
-				p.status_id = true
-			  	AND ps.stock_quantity > 0
-				AND (LOWER(p.name) LIKE LOWER($1) OR $1 IS NULL)
-				AND (p.unit_price BETWEEN $2 AND $3 OR $2 IS NULL OR $3 IS NULL)
-				AND (p.brand_id = ANY($4) OR $4 IS NULL)
-				AND (p.category_id = $5 OR $5 IS NULL)
-				AND (p.supplier_id = $6 OR $6 IS NULL)
-				AND (s.is_verified_supplier = $7 OR $7 IS NULL)
-				ORDER BY p.unit_price
-				LIMIT $8 OFFSET $9
-		`
+	query := `WITH filtered_products AS (
+					SELECT
+						p.id, p.name, p.description, p.brand_id, p.category_id, p.supplier_id,
+						p.unit_price, p.discount_price, p.tags, p.status_id, p.created_at
+					FROM
+						products p
+					JOIN
+						suppliers s ON p.supplier_id = s.id
+					JOIN
+						product_stocks ps ON p.id = ps.product_id
+					WHERE
+						p.status_id = true
+						AND ps.stock_quantity > 0
+						AND (LOWER(p.name) LIKE LOWER($1) OR $1 IS NULL)
+						AND (p.unit_price BETWEEN $2 AND $3 OR $2 IS NULL OR $3 IS NULL)
+						AND (p.brand_id = ANY($4) OR $4 IS NULL)
+						AND (p.category_id = $5 OR $5 IS NULL)
+						AND (p.supplier_id = $6 OR $6 IS NULL)
+						AND (s.is_verified_supplier = $7 OR $7 IS NULL)
+				)
+				SELECT
+					id, name, description, brand_id, category_id, supplier_id,
+					unit_price, discount_price, tags, status_id, created_at,
+					(
+						SELECT COUNT(*)
+						FROM filtered_products
+					) as total_count
+				FROM
+					filtered_products
+				ORDER BY
+					unit_price
+				LIMIT $8 OFFSET $9;
+			`
+
 	var totalCount int64
 	offset := (currentPageInt - 1) * itemPerPageInt
 	brandIDs := pq.Array(productFilterParams.BrandIDs)
